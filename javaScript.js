@@ -53,16 +53,16 @@ function resetAll(){
     output = 0
 }
 function operate(){
-    if(step === 0){
-        if(output != 0)
+    if(step === 0){ //step refers to number being modified
+        if(output != 0) // checks if you can run a calculation using output as the first number
             if(this.classList.contains("operatorButton")){
                 first = output
                 firstNumber.textContent = first
                 secondNumber.textContent = ""
                 operation.textContent = ""
-
+                equationResult.textContent = ""
             }
-            else{
+            else if(this.textContent != "="){
                 firstNumber.textContent = ""
                 secondNumber.textContent = ""
                 operation.textContent = ""
@@ -77,10 +77,6 @@ function operate(){
             console.log(operation)
             equationOperator.textContent = operation
         }
-
-
-        //CLEAN UP THIS AREA OF THE CODE, CAN COMBINE THESE FUNCTIONS ^^^^^^^^^^^^
-
 
         else if(this.textContent != "="){
             if(this.textContent != "."){
@@ -98,8 +94,11 @@ function operate(){
             }
         }
     }
-    else if(step === 1){
+    else if(step === 1){ //BUG BUG BUG BUG --- Hitting = before typing a number results in an = in the second numbers place
         if(this.classList.contains("operatorButton")){
+            return
+        }
+        else if(this.textContent === "=" && second === ""){
             return
         }
         else if(this.textContent === "=" && second != ""){
