@@ -1,5 +1,6 @@
 const calcButtons = document.getElementById("calcButtons")
 const reseter = document.getElementById("clear")
+const delButton = document.getElementById("back")
 let firstNumber = document.getElementById("first")
 let equationOperator = document.getElementById("operator")
 let secondNumber = document.getElementById("second")
@@ -8,9 +9,9 @@ let equationResult = document.getElementById("equationResult")
 const butIcons = [1, 2, 3, "+", 4, 5, 6, "-", 7, 8, 9, "x", ".", 0, "=", "/"]
 let first = ""
 let second = ""
-let operation = undefined
+let operation = ""
 let step = 0
-let output = 0
+let output = undefined
 
 function add(a, b){
     return Number(a)+Number(b)
@@ -47,10 +48,47 @@ function resetAll(){
     equationOperator.textContent = ""
     secondNumber.textContent = ""
     equationResult.textContent = ""
+    operation = ""
     first = ""
     second = ""
     step = 0
-    output = 0
+    output = undefined
+}
+function delLast(){
+    if(step === 0){
+        if(first != ""){
+            if(operation === ""){
+                first = first.slice(0, -1)
+                firstNumber.textContent = first
+            }
+            else{
+                operation = ""
+                equationOperator.textContent = operation
+            }
+        }
+        else{
+            return
+        }
+    }
+    if(step === 1){
+        if(second != ""){
+            second = second.slice(0, -1)
+            secondNumber.textContent = second
+        }
+        else{
+            operation = ""
+            step -= 1
+            equationOperator.textContent = operation
+        }
+    }
+}
+function setFirstNum(num, op){
+    resetAll()
+    first = num
+    firstNumber.textContent = first
+    operation = op
+    equationOperator.textContent = op
+    step = 1
 }
 function operate(){
     if(step === 0){ //step refers to number being modified
@@ -59,13 +97,13 @@ function operate(){
                 first = output
                 firstNumber.textContent = first
                 secondNumber.textContent = ""
-                operation.textContent = ""
+                equationOperator.textContent = ""
                 equationResult.textContent = ""
             }
             else if(this.textContent != "="){
                 firstNumber.textContent = ""
                 secondNumber.textContent = ""
-                operation.textContent = ""
+                equationOperator.textContent = ""
                 output = 0
             }
         if(this.classList.contains("operatorButton") && first === ""){
@@ -94,7 +132,7 @@ function operate(){
             }
         }
     }
-    else if(step === 1){ //BUG BUG BUG BUG --- Hitting = before typing a number results in an = in the second numbers place
+    else if(step === 1){
         if(this.classList.contains("operatorButton")){
             return
         }
@@ -140,9 +178,9 @@ function operate(){
         }
         console.log(first)
         console.log(second)
-        console.log(step)
     }
 
 }
 
 reseter.addEventListener("click", resetAll)
+delButton.addEventListener("click", delLast)

@@ -16,9 +16,10 @@ body{
     margin-left: auto;
     margin-right: auto;
     border-style: solid;
-    border-color: salmon;
-    border-width: 5px;
+    border-color: rgba(0, 164, 96, 0.742);
+    border-width: 8px;
     background-color: rgb(222, 222, 222);
+    border-radius: 20px;
 }
 #calcDisplay{
     display: flex;
@@ -47,9 +48,9 @@ body{
 #calcReset{
     display: flex;
     width: 100%;
-    justify-content: space-around;
+    justify-content: space-between;
     gap: 35px;
-    background-color: salmon;
+    background-color: rgba(0, 164, 96, 0.742);
     padding-top: 20px;
     padding-bottom: 20px;
 }
@@ -72,8 +73,36 @@ body{
     appearance: none;
     transition: .5s;
     font-size: 24px;
+    border-width: 1px;
+    border-color: rgba(0, 164, 96, 0.742);
 }
 .calcButton:hover{
-    background-color: grey;
+    background-color: rgba(41, 255, 105, 0.478);
+    transition: .5s;
+}
+.watermark{
+    display: flex;
+    align-items: space-around;
+    justify-content: center;
+    font-size: 16px;
+}
+.portfolio{
+    color: inherit;
+    text-decoration: none;
+    transition: 0.5s;
+}
+.portfolio:hover{
+    font-size: 24px;
+    color: whitesmoke;
+    transition: .5s;
+}
+.sourceCode{
+    color: inherit;
+    text-decoration: none;
+    transition: 0.5s;
+}
+.sourceCode:hover{
+    font-size: 24px;
+    color: whitesmoke;
     transition: .5s;
 }
